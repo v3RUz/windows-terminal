@@ -25,7 +25,7 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
   - [Step 5: Add dotnet CLI autocomplete](#step-5-add-dotnet-cli-autocomplete)
   - [Step 6: Add WinGet autocomplete](#step-6-add-winget-autocomplete)
   - [Step 7: Add Azure CLI autocomplete](#step-7-add-azure-cli-autocomplete)
-  - [Step 8: Install PoshGit](#step-8-install-poshgit)
+  - [Step 8: Install Posh-Git](#step-8-install-posh-git)
   - [Step 9: Add kubectl autocomplete](#step-9-add-kubectl-autocomplete)
 - [Reference configuration files](#reference-configuration-files)
 - [All Done!](#all-done)
