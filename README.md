@@ -1,6 +1,6 @@
 # Windows Terminal with PowerShell and Oh My Posh
 
-The primary purpose of this guide is to provide step-by-step instructions on how to set up Windows Terminal with PowerShell and Oh My Posh. Although tailored to personal preferences, this setup can help enhance productivity when working with a cloud native tech stack or any modern development environment.
+The primary purpose of this guide is to provide step-by-step instructions on how to set up Windows Terminal with PowerShell and Oh My Posh. Although tailored to personal preferences, this setup can help enhance productivity when working with a cloud-native tech stack or any modern development environment.
 
 By installing and configuring a curated set of tools, fonts, and PowerShell modules, you’ll achieve a productive, visually rich, and efficient terminal experience.
 
@@ -30,7 +30,7 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 - [Reference configuration files](#reference-configuration-files)
 - [All Done!](#all-done)
 
-## Alphabetical tool list
+## Alphabetical Tool List
 
 | Tool | Description |
 |------|-------------|
@@ -41,7 +41,7 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 | **Nerd Font** | Icon-enhanced fonts for terminals |
 | **Oh My Posh** | Customizable prompt engine |
 | **OpenSSL** | Toolkit for SSL/TLS and crypto |
-| **PoshGit** | Git enhancements for PowerShell |
+| **Posh-Git** | Git enhancements for PowerShell |
 | **PowerShell** | Cross-platform shell environment |
 | **PSReadLine** | Command-line editing + IntelliSense |
 | **Terminal Icons** | Adds icons to directory listings |
@@ -83,7 +83,7 @@ winget install Microsoft.PowerShell -s winget
 winget install Git.Git -e -s winget
 ```
 
-### Step 4: Install Microsoft Azure CLI
+### Step 4: Install Azure CLI
 
 ```powershell
 winget install Microsoft.AzureCLI -s winget
@@ -206,7 +206,7 @@ Register-ArgumentCompleter -Native -CommandName az -ScriptBlock {
 }
 ```
 
-### Step 8: Install PoshGit
+### Step 8: Install Posh-Git
 
 ```powershell
 Install-Module Posh-Git
@@ -219,7 +219,7 @@ Import-Module Posh-Git
 k completion powershell | Out-String | %{$_ -replace("'kubectl'", "'k'")} | Invoke-Expression
 ```
 
-## Reference configuration files
+## Reference Configuration Files
 
 - **Terminal configuration:** [settings.json](settings.json)  
   _Located at: `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`_
