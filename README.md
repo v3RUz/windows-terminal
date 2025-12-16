@@ -166,8 +166,8 @@ winget install JanDeDobbeleer.OhMyPosh -s winget
    oh-my-posh init pwsh --config "$([Environment]::GetFolderPath("MyDocuments"))/Oh My Posh/v3RUz.omp.json" | Invoke-Expression
    ```
 
-   > [!TIP]
-   > By using the `My Documents` special folder for the Oh My Posh configuration file, you ensure that the configuration is backed up to the cloud via OneDrive and as a bonus you can share the configuration between multiple PC’s.
+> [!TIP]
+> By using the `My Documents` special folder for the Oh My Posh configuration file, you ensure that the configuration is backed up to the cloud via OneDrive and as a bonus you can share the configuration between multiple PC’s.
 
 #### Additional customization options **(optional)**
 
@@ -225,7 +225,7 @@ Install-Module PSReadLine -AllowPrerelease -Force
    Set-PSReadLineOption -EditMode Windows
    ```
 
-> [!INFO]
+> [!NOTE]
 > The history data file is stored in “$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine”.
 
 ### Install C# REPL - Write C# inside Terminal
@@ -317,7 +317,7 @@ k completion powershell | Out-String | %{$_ -replace("'kubectl'", "'k'")} | Invo
 ```
 
 > [!NOTE]
-> If you opted in to using the PowerShell alias in [Core Step 5](#additional-configuration-optional), make sure to reflect that in this script.
+> If you added the optional `kubectl` PowerShell alias in [Core Step 5](#additional-configuration-optional), make sure to reflect that in this script.
 
 ### Install Posh-Git - Git CLI parameter completion
 
