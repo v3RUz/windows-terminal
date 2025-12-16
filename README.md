@@ -6,28 +6,29 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 
 ## Table of Contents
 
-- [Alphabetical tool list](#alphabetical-tool-list)
+- [Alphabetical Tool List](#alphabetical-tool-list)
 - [Pre-requisite: Windows Package Manager (WinGet)](#pre-requisite-windows-package-manager-winget)
 - [Core Steps](#core-steps)
   - [Step 1: Install Windows Terminal](#step-1-install-windows-terminal)
   - [Step 2: Install PowerShell](#step-2-install-powershell)
   - [Step 3: Install Git CLI](#step-3-install-git-cli)
-  - [Step 4: Install Microsoft Azure CLI](#step-4-install-microsoft-azure-cli)
+  - [Step 4: Install Azure CLI](#step-4-install-azure-cli)
   - [Step 5: Install Kubernetes CLI](#step-5-install-kubernetes-cli)
   - [Step 6: Install Terraform CLI](#step-6-install-terraform-cli)
   - [Step 7: Install Nerd Font](#step-7-install-nerd-font)
   - [Step 8: Install Oh My Posh](#step-8-install-oh-my-posh)
 - [Optional Steps](#optional-steps)
-  - [Step 1: Install OpenSSL](#step-1-install-openssl)
-  - [Step 2: Install Terminal Icons](#step-2-install-terminal-icons)
-  - [Step 3: Install PSReadLine](#step-3-install-psreadline)
-  - [Step 4: Install C# REPL](#step-4-install-c-repl)
-  - [Step 5: Add dotnet CLI autocomplete](#step-5-add-dotnet-cli-autocomplete)
-  - [Step 6: Add WinGet autocomplete](#step-6-add-winget-autocomplete)
-  - [Step 7: Add Azure CLI autocomplete](#step-7-add-azure-cli-autocomplete)
-  - [Step 8: Install Posh-Git](#step-8-install-posh-git)
-  - [Step 9: Add kubectl autocomplete](#step-9-add-kubectl-autocomplete)
-- [Reference configuration files](#reference-configuration-files)
+  - [Install OpenSSL](#install-openssl)
+  - [Install Terminal Icons](#install-terminal-icons)
+  - [Install PSReadLine - Predictive IntelliSense](#install-psreadline---predictive-intellisense)
+  - [Install C# REPL - Write C# inside Terminal](#install-c-repl---write-c-inside-terminal)
+- [Optional Parameter/Tab Completion](#optional-parametertab-completion)
+  - [Add dotnet CLI parameter completion](#add-dotnet-cli-parameter-completion)
+  - [Add WinGet parameter completion](#add-winget-parameter-completion)
+  - [Add Azure CLI parameter completion](#add-azure-cli-parameter-completion)
+  - [Add kubectl parameter completion](#add-kubectl-parameter-completion)
+  - [Install Posh-Git - Git CLI parameter completion](#install-posh-git---git-cli-parameter-completion)
+- [Reference Configuration Files](#reference-configuration-files)
 - [All Done!](#all-done)
 
 ## Alphabetical Tool List
@@ -59,13 +60,15 @@ If not, install it manually:
    https://github.com/microsoft/winget-cli/releases/latest
 2. Install via PowerShell:
 
-```powershell
-Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-```
+   ```powershell
+   Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+   ```
 
 ## Core Steps
 
 ### Step 1: Install Windows Terminal
+
+📘 https://github.com/microsoft/terminal
 
 ```powershell
 winget install Microsoft.WindowsTerminal -s winget
@@ -73,11 +76,15 @@ winget install Microsoft.WindowsTerminal -s winget
 
 ### Step 2: Install PowerShell
 
+📘 https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows
+
 ```powershell
 winget install Microsoft.PowerShell -s winget
 ```
 
 ### Step 3: Install Git CLI
+
+📘 https://git-scm.com/
 
 ```powershell
 winget install Git.Git -e -s winget
@@ -85,24 +92,45 @@ winget install Git.Git -e -s winget
 
 ### Step 4: Install Azure CLI
 
+📘 https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+
 ```powershell
 winget install Microsoft.AzureCLI -s winget
 ```
 
 ### Step 5: Install Kubernetes CLI
 
+📘 https://kubernetes.io/docs/reference/kubectl/
+
 ```powershell
 winget install --id Kubernetes.kubectl -e
 winget install --id Microsoft.Azure.Kubelogin -e
 ```
 
-### Optional alias
+#### Mandatory configuration
 
-```powershell
-Set-Alias -Name k -Value kubectl.exe
-```
+Follow the BIP onboarding setup instructions: [Riverty Kubernetes Developer Setup](https://riverty.atlassian.net/wiki/spaces/BIP/pages/104677999277/Capability+onboarding+guide+to+BIP#Setup-developer-environment-for-Kubernetes-(K8S)).
+
+#### Additional configuration **(optional)**
+
+If you frequently work with Kubernetes, consider adding this convenient alias for `kubectl`:
+
+1. Open your PowerShell profile in Notepad:
+
+   ```powershell
+   notepad $PROFILE
+   ```
+
+2. Add the following lines:
+
+   ```powershell
+   # Register an alias for kubectl
+   Set-Alias -Name k -Value kubectl.exe
+   ```
 
 ### Step 6: Install Terraform CLI
+
+📘 https://developer.hashicorp.com/terraform
 
 ```powershell
 winget install Hashicorp.Terraform -e -s winget
@@ -110,55 +138,122 @@ winget install Hashicorp.Terraform -e -s winget
 
 ### Step 7: Install Nerd Font
 
-Recommended: CaskaydiaCove Nerd Font  
-https://www.nerdfonts.com/
+📘 https://www.nerdfonts.com/
+
+Recommended: [CaskaydiaCove Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip)
+
+1. Download and install the fonts
+2. Set `CaskaydiaCove Nerd Font` as the font in your Terminal profile settings
 
 ### Step 8: Install Oh My Posh
+
+📘 https://ohmyposh.dev/docs/installation/windows
 
 ```powershell
 winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
 
-Add to PowerShell profile:
+1. Restart Terminal to reload the updated PATH
+2. Open your PowerShell profile:
 
-```powershell
-oh-my-posh init pwsh --config "$([Environment]::GetFolderPath("MyDocuments"))/Oh My Posh/v3RUz.omp.json" | Invoke-Expression
-```
+   ```powershell
+   notepad $PROFILE
+   ```
+
+3. Add the following line to automatically start Oh My Posh with new Terminal windows:
+
+   ```powershell
+   oh-my-posh init pwsh --config "$([Environment]::GetFolderPath("MyDocuments"))/Oh My Posh/v3RUz.omp.json" | Invoke-Expression
+   ```
+
+   > [!TIP]
+   > By using the `My Documents` special folder for the Oh My Posh configuration file, you ensure that the configuration is backed up to the cloud via OneDrive and as a bonus you can share the configuration between multiple PC’s.
+
+#### Additional customization options **(optional)**
+
+- https://ohmyposh.dev/docs/installation/customize
+- https://www.hanselman.com/blog/my-ultimate-powershell-prompt-with-oh-my-posh-and-the-windows-terminal
 
 ## Optional Steps
 
-### Step 1: Install OpenSSL
+### Install OpenSSL
+
+📘 https://slproweb.com/products/Win32OpenSSL.html
 
 ```powershell
 winget install ShiningLight.OpenSSL.Light -s winget
 ```
 
-### Step 2: Install Terminal Icons
+### Install Terminal Icons
 
 ```powershell
 Install-Module -Name Terminal-Icons -Repository PSGallery
-Import-Module Terminal-Icons
 ```
 
-### Step 3: Install PSReadLine
+1. Open your PowerShell profile:
+
+   ```powershell
+   notepad $PROFILE
+   ```
+
+2. Add the following line:
+
+   ```powershell
+   Import-Module -Name Terminal-Icons
+   ```
+
+### Install PSReadLine - Predictive IntelliSense
+
+📘 https://learn.microsoft.com/en-us/powershell/module/psreadline/about/about_psreadline
 
 ```powershell
 Install-Module PSReadLine -AllowPrerelease -Force
-Import-Module PSReadLine
-Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption -PredictionViewStyle ListView
-Set-PSReadLineOption -EditMode Windows
 ```
 
-### Step 4: Install C# REPL
+1. Open your PowerShell profile:
+
+   ```powershell
+   notepad $PROFILE
+   ```
+
+2. Add the following lines:
+
+   ```powershell
+   Import-Module PSReadLine
+   Set-PSReadLineOption -PredictionSource History
+   Set-PSReadLineOption -PredictionViewStyle ListView
+   Set-PSReadLineOption -EditMode Windows
+   ```
+
+> [!INFO]
+> The history data file is stored in “$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine”.
+
+### Install C# REPL - Write C# inside Terminal
+
+📘 https://github.com/waf/CSharpRepl
 
 ```powershell
 dotnet tool install -g csharprepl
 ```
 
-### Step 5: Add dotnet CLI autocomplete
+## Optional Parameter/Tab Completion
+
+The following steps have command snippets that needs to be added to your PowerShell profile.
+
+1. Open your PowerShell profile:
+
+   ```powershell
+   notepad $PROFILE
+   ```
+
+2. Add the PowerShell command snippet from the corresponding step below.
+
+### Add dotnet CLI parameter completion
+
+📘 https://www.hanselman.com/blog/how-to-use-autocomplete-at-the-command-line-for-dotnet-git-winget-and-more
 
 ```powershell
+# PowerShell parameter completion shim for the dotnet CLI
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
   param($commandName, $wordToComplete, $cursorPosition)
   dotnet complete --position $cursorPosition "$wordToComplete" |
@@ -168,9 +263,12 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
 }
 ```
 
-### Step 6: Add WinGet autocomplete
+### Add WinGet parameter completion
+
+📘 https://github.com/microsoft/winget-cli/blob/master/doc/Completion.md
 
 ```powershell
+# PowerShell parameter completion shim for winget
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
   param($wordToComplete, $commandAst, $cursorPosition)
   [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
@@ -183,9 +281,12 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 ```
 
-### Step 7: Add Azure CLI autocomplete
+### Add Azure CLI parameter completion
+
+📘 https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli#enable-tab-completion-in-powershell
 
 ```powershell
+# PowerShell parameter completion shim for the Azure CLI
 Register-ArgumentCompleter -Native -CommandName az -ScriptBlock {
   param($commandName, $wordToComplete, $cursorPosition)
   $completion_file = New-TemporaryFile
@@ -206,18 +307,36 @@ Register-ArgumentCompleter -Native -CommandName az -ScriptBlock {
 }
 ```
 
-### Step 8: Install Posh-Git
+### Add kubectl parameter completion
+
+📘 https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#optional-kubectl-configurations-and-plugins
+
+```powershell
+# Generate parameter completion script for kubectl (replace command with the alias created above)
+k completion powershell | Out-String | %{$_ -replace("'kubectl'", "'k'")} | Invoke-Expression
+```
+
+> [!NOTE]
+> If you opted in to using the PowerShell alias in [Core Step 5](#additional-configuration-optional), make sure to reflect that in this script.
+
+### Install Posh-Git - Git CLI parameter completion
+
+📘 https://github.com/dahlbyk/posh-git
 
 ```powershell
 Install-Module Posh-Git
-Import-Module Posh-Git
 ```
+1. Open your PowerShell profile:
 
-### Step 9: Add kubectl autocomplete
+   ```powershell
+   notepad $PROFILE
+   ```
 
-```powershell
-k completion powershell | Out-String | %{$_ -replace("'kubectl'", "'k'")} | Invoke-Expression
-```
+2. Add the following line:
+
+   ```powershell
+   Import-Module Posh-Git
+   ```
 
 ## Reference Configuration Files
 
