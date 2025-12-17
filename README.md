@@ -11,16 +11,17 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 - [Core Steps](#core-steps)
   - [Step 1: Install Windows Terminal](#step-1-install-windows-terminal)
   - [Step 2: Install PowerShell](#step-2-install-powershell)
-  - [Step 3: Install Git CLI](#step-3-install-git-cli)
-  - [Step 4: Install Azure CLI](#step-4-install-azure-cli)
-  - [Step 5: Install Kubernetes CLI](#step-5-install-kubernetes-cli)
-  - [Step 6: Install Terraform CLI](#step-6-install-terraform-cli)
-  - [Step 7: Install Nerd Font](#step-7-install-nerd-font)
-  - [Step 8: Install Oh My Posh](#step-8-install-oh-my-posh)
+  - [Step 3: Install Nerd Font](#step-3-install-nerd-font)
+  - [Step 4: Install Oh My Posh](#step-4-install-oh-my-posh)
+  - [Step 5: Install Git CLI](#step-5-install-git-cli)
+  - [Step 6: Install Azure CLI](#step-6-install-azure-cli)
+  - [Step 7: Install Kubernetes CLI](#step-7-install-kubernetes-cli)
+  - [Step 8: Install Terraform CLI](#step-8-install-terraform-cli)
 - [Optional Steps](#optional-steps)
   - [Install OpenSSL](#install-openssl)
   - [Install Terminal Icons](#install-terminal-icons)
   - [Install PSReadLine - Predictive IntelliSense](#install-psreadline---predictive-intellisense)
+  - [Install GitHub Copilot CLI](#install-github-copilot-cli)
   - [Install C# REPL - Write C# inside Terminal](#install-c-repl---write-c-inside-terminal)
 - [Optional Parameter/Tab Completion](#optional-parametertab-completion)
   - [Add dotnet CLI parameter completion](#add-dotnet-cli-parameter-completion)
@@ -38,6 +39,7 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 | **Azure CLI** | Manage Azure resources directly from the terminal |
 | **C# REPL** | Interactive C# scripting |
 | **Git CLI** | Distributed version control |
+| **GitHub Copilot CLI** | AI-powered command-line assistance |
 | **Kubernetes CLI (kubectl)** | Interact with Kubernetes clusters |
 | **Nerd Font** | Icon-enhanced fonts for terminals |
 | **Oh My Posh** | Customizable prompt engine |
@@ -82,7 +84,45 @@ winget install Microsoft.WindowsTerminal -s winget
 winget install Microsoft.PowerShell -s winget
 ```
 
-### Step 3: Install Git CLI
+### Step 3: Install Nerd Font
+
+📘 https://www.nerdfonts.com/
+
+Recommended: [CaskaydiaCove Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip)
+
+1. Download and install the fonts
+2. Set `CaskaydiaCove Nerd Font` as the font in your Terminal profile settings
+
+### Step 4: Install Oh My Posh
+
+📘 https://ohmyposh.dev/docs/installation/windows
+
+```powershell
+winget install JanDeDobbeleer.OhMyPosh -s winget
+```
+
+1. Restart Terminal to reload the updated PATH
+2. Open your PowerShell profile:
+
+   ```powershell
+   notepad $PROFILE
+   ```
+
+3. Add the following line to automatically start Oh My Posh with new Terminal windows:
+
+   ```powershell
+   oh-my-posh init pwsh --config "$([Environment]::GetFolderPath("MyDocuments"))/Oh My Posh/v3RUz.omp.json" | Invoke-Expression
+   ```
+
+> [!TIP]
+> By using the `My Documents` special folder for the Oh My Posh configuration file, you ensure that the configuration is backed up to the cloud via OneDrive and as a bonus you can share the configuration between multiple PC’s.
+
+#### Additional customization options **(optional)**
+
+- https://ohmyposh.dev/docs/installation/customize
+- https://www.hanselman.com/blog/my-ultimate-powershell-prompt-with-oh-my-posh-and-the-windows-terminal
+
+### Step 5: Install Git CLI
 
 📘 https://git-scm.com/
 
@@ -90,7 +130,7 @@ winget install Microsoft.PowerShell -s winget
 winget install Git.Git -e -s winget
 ```
 
-### Step 4: Install Azure CLI
+### Step 6: Install Azure CLI
 
 📘 https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 
@@ -98,7 +138,7 @@ winget install Git.Git -e -s winget
 winget install Microsoft.AzureCLI -s winget
 ```
 
-### Step 5: Install Kubernetes CLI
+### Step 7: Install Kubernetes CLI
 
 📘 https://kubernetes.io/docs/reference/kubectl/
 
@@ -128,51 +168,13 @@ If you frequently work with Kubernetes, consider adding this convenient alias fo
    Set-Alias -Name k -Value kubectl.exe
    ```
 
-### Step 6: Install Terraform CLI
+### Step 8: Install Terraform CLI
 
 📘 https://developer.hashicorp.com/terraform
 
 ```powershell
 winget install Hashicorp.Terraform -e -s winget
 ```
-
-### Step 7: Install Nerd Font
-
-📘 https://www.nerdfonts.com/
-
-Recommended: [CaskaydiaCove Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip)
-
-1. Download and install the fonts
-2. Set `CaskaydiaCove Nerd Font` as the font in your Terminal profile settings
-
-### Step 8: Install Oh My Posh
-
-📘 https://ohmyposh.dev/docs/installation/windows
-
-```powershell
-winget install JanDeDobbeleer.OhMyPosh -s winget
-```
-
-1. Restart Terminal to reload the updated PATH
-2. Open your PowerShell profile:
-
-   ```powershell
-   notepad $PROFILE
-   ```
-
-3. Add the following line to automatically start Oh My Posh with new Terminal windows:
-
-   ```powershell
-   oh-my-posh init pwsh --config "$([Environment]::GetFolderPath("MyDocuments"))/Oh My Posh/v3RUz.omp.json" | Invoke-Expression
-   ```
-
-> [!TIP]
-> By using the `My Documents` special folder for the Oh My Posh configuration file, you ensure that the configuration is backed up to the cloud via OneDrive and as a bonus you can share the configuration between multiple PC’s.
-
-#### Additional customization options **(optional)**
-
-- https://ohmyposh.dev/docs/installation/customize
-- https://www.hanselman.com/blog/my-ultimate-powershell-prompt-with-oh-my-posh-and-the-windows-terminal
 
 ## Optional Steps
 
@@ -227,6 +229,17 @@ Install-Module PSReadLine -AllowPrerelease -Force
 
 > [!NOTE]
 > The history data file is stored in “$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine”.
+
+### Install GitHub Copilot CLI
+
+📘 https://github.com/github/copilot-cli
+
+```powershell
+winget install GitHub.Copilot -s winget
+```
+
+> [!TIP]
+> The Terminal configuration file in [Reference Configuration Files](#reference-configuration-files) contains an example how to register the Copilot CLI as a custom profile, which can be directly opened in a new tab.
 
 ### Install C# REPL - Write C# inside Terminal
 
@@ -317,7 +330,7 @@ k completion powershell | Out-String | %{$_ -replace("'kubectl'", "'k'")} | Invo
 ```
 
 > [!NOTE]
-> If you added the optional `kubectl` PowerShell alias in [Core Step 5](#additional-configuration-optional), make sure to reflect that in this script.
+> If you added the optional `kubectl` PowerShell alias in [Core Step 7](#additional-configuration-optional), make sure to reflect that in this script.
 
 ### Install Posh-Git - Git CLI parameter completion
 

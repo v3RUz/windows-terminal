@@ -91,8 +91,15 @@
                 "name": "Windows PowerShell"
             },
             {
+                "commandline": "copilot",
+                "guid": "{b4bd17b5-0e29-4b37-9cf6-c18e291e3ce5}",
+                "icon": "C:\\Users\\ANTO026\\OneDrive - Bertelsmann SE & Co. KGaA\\Documents\\Terminal\\github-copilot-48.png",
+                "name": "GitHub Copilot"
+            },
+            {
                 "commandline": "csharprepl",
                 "guid": "{3abe3d6c-90e9-4ce4-9587-f5d59ff3d544}",
+                "icon": "C:\\Users\\ANTO026\\OneDrive - Bertelsmann SE & Co. KGaA\\Documents\\Terminal\\c-sharp-logo-16.png",
                 "name": "C# REPL"
             },
             {
