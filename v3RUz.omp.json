@@ -3,7 +3,7 @@
   "palette": {
     "black": "#262B44",
     "blue": "#4B95E9",
-    "darkgreen": "#6CA35E",
+    "darkgreen": "#658F92",
     "green": "#59C9A5",
     "orange": "#d4671f",
     "pink": "#ff479c",
@@ -57,7 +57,7 @@
           "template": " \udb82\udc33 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
           "foreground": "p:black",
           "powerline_symbol": "\ue0b0",
-          "background": "#658F92",
+          "background": "p:darkgreen",
           "type": "kubectl",
           "include_folders": [
             "C:/Horizon/Source/Repos.*"
@@ -127,19 +127,30 @@
         },
         {
           "style": "plain",
-          "template": " \ue753 {{ .Full }} ",
+          "template": " \ue753 {{ if .Error }}!{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#bd002e",
           "background": "transparent",
           "type": "angular"
         },
         {
           "style": "plain",
-          "template": " \ue718{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ end }}{{ .Full }} ",
+          "template": " \ue718{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ end }} {{ .Full }} ",
           "foreground": "#68a063",
           "background": "transparent",
           "type": "node"
         },
-        {
+		{
+		  "type": "copilot",
+		  "template": "   {{ .Premium.Percent.Gauge }} ",
+		  "cache": {
+		    "duration": "5m",
+		    "strategy": "session"
+		  },
+		  "properties": {
+		    "http_timeout": 1000
+		  }
+		},
+		{
           "style": "plain",
           "template": " in <p:blue><b>{{ .Name }}</b></> ",
           "foreground": "p:white",
