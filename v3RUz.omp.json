@@ -121,7 +121,7 @@
         {
           "style": "plain",
           "template": " {{ if .Unsupported }}\uf071{{ else }}\ue70c {{ .Major }}.{{ .Minor }}{{ end }} ",
-          "foreground": "p:darkgreen",
+          "foreground": "#6CA35E",
           "background": "transparent",
           "type": "dotnet"
         },
@@ -141,7 +141,12 @@
         },
 		{
 		  "type": "copilot",
-		  "template": "   {{ .Premium.Percent.Gauge }} ",
+		  "template": "  {{ .Premium.Percent.Gauge }} ",
+          "background": "#d1c5c5",
+          "foreground": "#1b1429",
+		  "style": "diamond",
+		  "leading_diamond": " \ue0b6",
+		  "trailing_diamond": "\ue0b4 ",
 		  "cache": {
 		    "duration": "5m",
 		    "strategy": "session"
