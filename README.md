@@ -356,7 +356,7 @@ Install-Module Posh-Git
 - **Terminal configuration:** [settings.json](settings.json)  
   _Located at: `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`_
 
-- **Terminal background image:** [2020-mercy-overwatch-4k-rp-1920x1200.jpg](2020-mercy-overwatch-4k-rp-1920x1200.jpg)  
+- **Terminal background image:** [terminal-background-1920x1200.jpg](terminal-background-1920x1200.jpg)  
   _Can be placed anywhere; reference the path in settings.json under `backgroundImage`_
 
 - **Oh My Posh configuration:** [v3RUz.omp.json](v3RUz.omp.json)  
