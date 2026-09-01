@@ -22,7 +22,6 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
   - [Install Terminal Icons](#install-terminal-icons)
   - [Install PSReadLine - Predictive IntelliSense](#install-psreadline---predictive-intellisense)
   - [Install GitHub Copilot CLI](#install-github-copilot-cli)
-  - [Install C# REPL - Write C# inside Terminal](#install-c-repl---write-c-inside-terminal)
 - [Optional Parameter/Tab Completion](#optional-parametertab-completion)
   - [Add dotnet CLI parameter completion](#add-dotnet-cli-parameter-completion)
   - [Add WinGet parameter completion](#add-winget-parameter-completion)
@@ -37,7 +36,6 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 | Tool | Description |
 |------|-------------|
 | **Azure CLI** | Manage Azure resources directly from the terminal |
-| **C# REPL** | Interactive C# scripting |
 | **Git CLI** | Distributed version control |
 | **GitHub Copilot CLI** | AI-powered command-line assistance |
 | **Kubernetes CLI (kubectl)** | Interact with Kubernetes clusters |
@@ -88,7 +86,7 @@ winget install Microsoft.PowerShell -s winget
 
 📘 https://www.nerdfonts.com/
 
-Recommended: [CaskaydiaCove Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip)
+Recommended: [CaskaydiaCove Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/CascadiaCode.zip)
 
 1. Download and install the fonts
 2. Set `CaskaydiaCove Nerd Font` as the font in your Terminal profile settings
@@ -240,14 +238,6 @@ winget install GitHub.Copilot -s winget
 
 > [!TIP]
 > The Terminal configuration file in [Reference Configuration Files](#reference-configuration-files) contains an example how to register the Copilot CLI as a custom profile, which can be directly opened in a new tab.
-
-### Install C# REPL - Write C# inside Terminal
-
-📘 https://github.com/waf/CSharpRepl
-
-```powershell
-dotnet tool install -g csharprepl
-```
 
 ## Optional Parameter/Tab Completion
 
