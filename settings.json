@@ -16,10 +16,6 @@
             "id": "User.paste"
         },
         {
-            "command": "find",
-            "id": "User.find"
-        },
-        {
             "command": 
             {
                 "action": "splitPane",
@@ -27,6 +23,18 @@
                 "splitMode": "duplicate"
             },
             "id": "User.splitPane.A6751878"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
+        },
+        {
+            "command": 
+            {
+                "action": "sendInput",
+                "input": "\u001b\r"
+            },
+            "id": "User.sendInput.8F63D3A9"
         }
     ],
     "copyFormatting": "none",
@@ -35,20 +43,24 @@
     "keybindings": 
     [
         {
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+c"
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
         },
         {
-            "id": "User.paste",
-            "keys": "ctrl+v"
+            "id": "User.sendInput.8F63D3A9",
+            "keys": "shift+enter"
+        },
+        {
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+c"
         },
         {
             "id": "User.find",
             "keys": "ctrl+shift+f"
         },
         {
-            "id": "User.splitPane.A6751878",
-            "keys": "alt+shift+d"
+            "id": "User.paste",
+            "keys": "ctrl+v"
         }
     ],
     "newTabMenu": 
@@ -94,7 +106,8 @@
                 "commandline": "copilot",
                 "guid": "{b4bd17b5-0e29-4b37-9cf6-c18e291e3ce5}",
                 "icon": "C:\\Users\\AntonssonAndreas\\OneDrive - Riverty Group GmbH\\Documents\\Terminal\\icon-github-copilot-48.png",
-                "name": "GitHub Copilot"
+                "name": "GitHub Copilot",
+                "startingDirectory": "C:\\Horizon\\Source\\Repos"
             },
             {
                 "commandline": "csharprepl",
