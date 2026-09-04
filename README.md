@@ -425,7 +425,7 @@ Set-PSReadLineKeyHandler -Chord Tab -ScriptBlock {
         return
     }
 
-    # Insert an instant Nerd Font hourglass as visual "working..." feedback.
+    # Insert an instant Nerd Font hourglass as visual feedback.
     $placeholder = [string][char]0xF252   # nf-fa-hourglass_half
     $insertStart = $cursor
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($placeholder)
