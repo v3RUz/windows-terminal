@@ -329,22 +329,19 @@ k completion powershell | Out-String | %{$_ -replace("'kubectl'", "'k'")} | Invo
 ```
 
 > [!NOTE]
-> If you added the optional `kubectl` PowerShell alias in [Core Step 7](#additional-configuration-optional), make sure to reflect that in this script.
+> If you opted in to using the PowerShell alias while installing the [Kubernetes CLI](#additional-configuration-optional), make sure to reflect that in this script.
 
 ### Install Posh-Git - Git CLI parameter completion
 
 📘 https://github.com/dahlbyk/posh-git
 
-```powershell
-Install-Module Posh-Git
-```
-1. Open your PowerShell profile:
+1. Install the Posh-Git module:
 
    ```powershell
-   notepad $PROFILE
+   Install-Module Posh-Git
    ```
 
-2. Add the following line:
+2. Add to your PowerShell profile:
 
    ```powershell
    Import-Module Posh-Git
