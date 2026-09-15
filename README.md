@@ -18,6 +18,7 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
   - [Step 7: Install Kubernetes CLI](#step-7-install-kubernetes-cli)
   - [Step 8: Install Terraform CLI](#step-8-install-terraform-cli)
 - [Optional Steps](#optional-steps)
+  - [Install TFLint (Terraform linter)](#install-tflint-terraform-linter)
   - [Install OpenSSL](#install-openssl)
   - [Install Terminal Icons](#install-terminal-icons)
   - [Install PSReadLine - Predictive IntelliSense](#install-psreadline---predictive-intellisense)
@@ -48,6 +49,7 @@ By installing and configuring a curated set of tools, fonts, and PowerShell modu
 | **PSReadLine** | Command-line editing + IntelliSense |
 | **Terminal Icons** | Adds icons to directory listings |
 | **Terraform** | Infrastructure-as-Code tool |
+| **TFLint** | A pluggable Terraform linter |
 | **Windows Terminal** | Modern GPU-accelerated terminal |
 | **WinGet** | Windows package manager |
 
@@ -176,6 +178,14 @@ winget install Hashicorp.Terraform -e -s winget
 ```
 
 ## Optional Steps
+
+### Install TFLint (Terraform linter)
+
+📘 https://github.com/terraform-linters/tflint
+
+```powershell
+winget install TerraformLinters.tflint -e
+```
 
 ### Install OpenSSL
 
