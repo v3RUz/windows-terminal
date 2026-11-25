@@ -382,7 +382,7 @@ function Get-CopilotCommitMessage {
     $files = git diff --cached --name-status 2>$null | Out-String
 
     $prompt = @'
-You will receive a git staged diff on stdin. Output EXACTLY ONE
+You will receive a git staged diff below. Output EXACTLY ONE
 Conventional Commit message describing the change.
 
 Rules:
@@ -393,11 +393,38 @@ Rules:
 - No preamble or explanation — output ONLY the commit message text.
 '@
 
-    $stdin = "Files changed:`n$files`nDiff:`n$Diff"
-    $msg = $stdin |
-        & copilot -p $prompt --allow-all-tools --no-ask-user -s --log-level none 2>$null |
-        Where-Object { $_ -and $_.Trim() } |
-        Select-Object -Last 1
+    # Copilot CLI always persists a session, so run it with a throwaway COPILOT_HOME
+    # (keeps it out of ~/.copilot, the session picker and VS Code), from %TEMP% instead of the repo,
+    # with remote sync off, and delete the session folder afterwards.
+    $previousHome = $env:COPILOT_HOME
+    $mainHome     = if ($previousHome) { $previousHome } else { Join-Path $env:USERPROFILE '.copilot' }
+    $copilotHome  = Join-Path $env:LOCALAPPDATA 'copilot-commitmsg'
+    $configPath   = Join-Path $copilotHome 'config.json'
+    $null = New-Item -ItemType Directory -Path $copilotHome -Force
+    # The auth token lives in Credential Manager; the CLI only needs to know which user to use.
+    $mainConfig = Get-Content (Join-Path $mainHome 'config.json') -Raw -ErrorAction SilentlyContinue | ConvertFrom-Json -ErrorAction SilentlyContinue
+    if ($mainConfig.lastLoggedInUser) {
+        $config = Get-Content $configPath -Raw -ErrorAction SilentlyContinue | ConvertFrom-Json -ErrorAction SilentlyContinue
+        if (-not $config) { $config = [pscustomobject]@{} }
+        $config | Add-Member lastLoggedInUser $mainConfig.lastLoggedInUser -Force
+        $config | Add-Member loggedInUsers $mainConfig.loggedInUsers -Force
+        $config | ConvertTo-Json -Depth 10 | Set-Content $configPath
+    }
+
+    $sessionId = [guid]::NewGuid().ToString()
+    $env:COPILOT_HOME = $copilotHome
+    try {
+        # Piped stdin is ignored when -p is given, so send instructions + diff together as the prompt via stdin.
+        $stdin = "$prompt`n`nFiles changed:`n$files`nDiff:`n$Diff"
+        $msg = $stdin |
+            & copilot -C $env:TEMP --session-id $sessionId --sync-session=off --disable-builtin-mcps --no-custom-instructions --no-ask-user -s --log-level none 2>$null |
+            Where-Object { $_ -and $_.Trim() } |
+            Select-Object -Last 1
+    }
+    finally {
+        $env:COPILOT_HOME = $previousHome
+        Remove-Item (Join-Path $copilotHome "session-state\$sessionId") -Recurse -Force -ErrorAction SilentlyContinue
+    }
 
     if (-not $msg) { return $null }
 
@@ -432,7 +459,7 @@ Set-PSReadLineKeyHandler -Chord Tab -ScriptBlock {
         return
     }
 
-    # Insert an instant Nerd Font hourglass as visual feedback.
+    # Insert an instant Nerd Font hourglass as visual "working..." feedback.
     $placeholder = [string][char]0xF252   # nf-fa-hourglass_half
     $insertStart = $cursor
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($placeholder)
